@@ -42,37 +42,37 @@ function myFunction() {
   document.getElementById("demo").innerHTML = "You selected: " + proj_type;
   switch (proj_type) {
     case "geoMercator":
-      console.log("geoMercator selected")
+      //console.log("geoMercator selected")
       projection = proj_geoMercator;
       svg.selectAll("*").remove();
       ready(glob_error, glob_topo)
       break;
     case "geoLoximuthal":
-      console.log("geoLoximuthal selected")
+      //console.log("geoLoximuthal selected")
       projection = proj_geoLoximuthal;
       svg.selectAll("*").remove();
       ready(glob_error, glob_topo)
       break;
     case "geoLittrow":
-      console.log("geoLittrow selected")
+      //console.log("geoLittrow selected")
       projection = proj_geoLittrow;
       svg.selectAll("*").remove();
       ready(glob_error, glob_topo)
       break;
     case "geoLaskowski":
-      console.log("geoLaskowski selected")
+      //console.log("geoLaskowski selected")
       projection = proj_geoLaskowski;
       svg.selectAll("*").remove();
       ready(glob_error, glob_topo)
       break;
     case "geoEquirectangular":
-      console.log("geoEquirectangular selected")
+      //console.log("geoEquirectangular selected")
       projection = proj_geoEquirectangular;
       svg.selectAll("*").remove();
       ready(glob_error, glob_topo)
       break;
     case "geoMiller":
-      console.log("geoMiller selected")
+      //console.log("geoMiller selected")
       projection = proj_geoMiller;
       svg.selectAll("*").remove();
       ready(glob_error, glob_topo)
@@ -166,8 +166,8 @@ function get_world_pop_cr_iso(country_code){
 }
 
 function ready(error, topo) {
-  console.log("error:", error)
-  console.log("topo:", topo)
+  //console.log("error:", error)
+  //console.log("topo:", topo)
   glob_error = error
   glob_topo = topo
   //console.log("world_pop_cr_iso:\n", world_pop_cr_iso)
