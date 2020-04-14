@@ -19,11 +19,66 @@
 <div id="country_code"></div><br>
 <div id="population"></div><br>
 <div id="SandP"></div><br>
+
+<select id="mySelect" onchange="myFunction()">
+  <option value="geoMercator">geoMercator</option>
+  <option value="geoLoximuthal">geoLoximuthal</option>
+  <option value="geoLittrow">geoLittrow</option>
+  <option value="geoLaskowski">geoLaskowski</option>
+  <option value="geoEquirectangular">geoEquirectangular</option>
+  <option value="geoMiller">geoMiller</option>
+</select><br>
+<p id="demo"></p>
+
 </body>
 
 <script>
 //console.log("screen.width:", screen.width)
 //console.log("screen.height:", screen.height)
+var glob_error, glob_topo;
+
+function myFunction() {
+  var proj_type = document.getElementById("mySelect").value;
+  document.getElementById("demo").innerHTML = "You selected: " + proj_type;
+  switch (proj_type) {
+    case "geoMercator":
+      console.log("geoMercator selected")
+      projection = proj_geoMercator;
+      svg.selectAll("*").remove();
+      ready(glob_error, glob_topo)
+      break;
+    case "geoLoximuthal":
+      console.log("geoLoximuthal selected")
+      projection = proj_geoLoximuthal;
+      svg.selectAll("*").remove();
+      ready(glob_error, glob_topo)
+      break;
+    case "geoLittrow":
+      console.log("geoLittrow selected")
+      projection = proj_geoLittrow;
+      svg.selectAll("*").remove();
+      ready(glob_error, glob_topo)
+      break;
+    case "geoLaskowski":
+      console.log("geoLaskowski selected")
+      projection = proj_geoLaskowski;
+      svg.selectAll("*").remove();
+      ready(glob_error, glob_topo)
+      break;
+    case "geoEquirectangular":
+      console.log("geoEquirectangular selected")
+      projection = proj_geoEquirectangular;
+      svg.selectAll("*").remove();
+      ready(glob_error, glob_topo)
+      break;
+    case "geoMiller":
+      console.log("geoMiller selected")
+      projection = proj_geoMiller;
+      svg.selectAll("*").remove();
+      ready(glob_error, glob_topo)
+      break;
+  }
+}
 var world_pop_cr_iso = []
 elem_country_name = document.getElementById("country_name");
 elem_country_code = document.getElementById("country_code");
@@ -37,15 +92,38 @@ var svg = d3.select("svg"),
 // Map and projection
 var path = d3.geoPath();
 //refer > https://github.com/d3/d3-geo-projection#projections
-var projection = d3.geoMercator()
+var projection
+var proj_geoMercator = d3.geoMercator()
+  .scale(100)
+  .center([0,20])
+  .translate([width / 2, height / 2]);
+projection = proj_geoMercator;
 //var projection = d3.geoLoximuthal()
 //var projection = d3.geoLittrow()
 //var projection = d3.geoLaskowski()
 //var projection = d3.geoEquirectangular()
 //var projection = d3.geoMiller()
+var proj_geoLoximuthal = d3.geoLoximuthal()
   .scale(100)
   .center([0,20])
   .translate([width / 2, height / 2]);
+var proj_geoLittrow = d3.geoLittrow()
+  .scale(100)
+  .center([0,20])
+  .translate([width / 2, height / 2]);
+var proj_geoLaskowski = d3.geoLaskowski()
+  .scale(100)
+  .center([0,20])
+  .translate([width / 2, height / 2]);
+var proj_geoEquirectangular = d3.geoEquirectangular()
+  .scale(100)
+  .center([0,20])
+  .translate([width / 2, height / 2]);
+var proj_geoMiller = d3.geoMiller()
+  .scale(100)
+  .center([0,20])
+  .translate([width / 2, height / 2]);
+
 
 // Data and color scale
 var data = d3.map();
@@ -88,6 +166,10 @@ function get_world_pop_cr_iso(country_code){
 }
 
 function ready(error, topo) {
+  console.log("error:", error)
+  console.log("topo:", topo)
+  glob_error = error
+  glob_topo = topo
   //console.log("world_pop_cr_iso:\n", world_pop_cr_iso)
 
   let mouseOver = function(d) {
